@@ -1,0 +1,1 @@
+![arch](/images/almond-operator.png)
