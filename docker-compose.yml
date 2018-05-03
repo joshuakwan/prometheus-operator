@@ -1,0 +1,27 @@
+version: "3.2"
+
+services:
+  alertmanager:
+    image: prom/alertmanager:v0.15.0-rc.1
+    networks:
+      - data-network
+    restart: on-failure
+    ports:
+      - "9093:9093"
+    volumes:
+      - ./resources:/etc/almond:ro
+    command:
+      - --config.file=/etc/almond/alertmanager.yml
+
+  prometheus:
+    image: prom/prometheus
+    networks:
+      - data-network
+    restart: on-failure
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./resources:/etc/almond:ro
+    command:
+      - --config.file=/etc/almond/prometheus.yml
+      - --web.enable-lifecycle
